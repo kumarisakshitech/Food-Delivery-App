@@ -16,7 +16,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // 📌 PLACE ORDER + CREATE STRIPE SESSION
 // -----------------------------------------------------------------------------
 const placeOrder = async (req, res) => {
-  const frontend_url = "https://food-delivery-front-6oxy.onrender.com"// Your React App URL
+  const frontend_url = "https://food-delivery-front-6oxy.onrender.com";// Your React App URL
 
   try {
 
