@@ -1,25 +1,33 @@
 import express from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
+import foodRouter from "./routes/foodRoute.js";
+import userRouter from "./routes/userRoute.js";
+import cartRouter from "./routes/cartRoute.js";
+import orderRouter from "./routes/orderRoute.js";
+import 'dotenv/config';
 
-// app config
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
-// middleware
+// Middlewares
 app.use(express.json());
 app.use(cors());
+app.use("/images", express.static("uploads"));
 
-//db connection
+// 🔥 Routes (CORRECT PATHS)
+app.use("/api/user", userRouter);
+app.use("/api/cart", cartRouter);      // ❗ YOU MISSED QUOTE FIXED
+app.use("/api/food", foodRouter);
+app.use("/api/order", orderRouter);    // Stripe Orders
+
+// Database Connection
 connectDB();
 
-// routes
 app.get("/", (req, res) => {
-  res.send("API Working");
+    res.send("API Working Successfully 🔥");
 });
 
-// start server
 app.listen(port, () => {
-  console.log(`Server Started on http://localhost:${port}`);
+    console.log(`🚀 Server running at http://localhost:${port}`);
 });
-//mongodb+srv://GreatStack:12345@cluster0.3r033pj.mongodb.net/?

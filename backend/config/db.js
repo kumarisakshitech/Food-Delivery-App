@@ -1,5 +1,14 @@
 import mongoose from "mongoose";
 
- export const connectDB = async ()=>{
-    (await mongoose.connect('mongodb+srv://GreatStack:12345@cluster0.3r033pj.mongodb.net/food-del')).isObjectIdOrHexString(()=>console.log("DB Connected"));
-}
+export const connectDB = async () => {
+  try {
+    await mongoose.connect("mongodb+srv://sakshi_123:Sakshi08@fooddelivery.k084loh.mongodb.net/foodDelivery", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("✅ MongoDB Connected Successfully");
+  } catch (error) {
+    console.error("❌ MongoDB Connection Failed:", error.message);
+    process.exit(1); // stop server if db fails
+  }
+};

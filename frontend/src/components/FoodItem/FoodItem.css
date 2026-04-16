@@ -64,3 +64,25 @@
 .food-item-counter img{
     width: 30px ;
 }
+/* Hover Blink / Pulse Glow Effect */
+.hover-blink {
+  transition: all 0.3s ease;
+  border-radius: 16px;
+}
+
+.hover-blink:hover {
+  animation: pulseGlow 1.2s infinite;
+  transform: translateY(-5px);
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 8px rgba(255, 150, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(255, 100, 0, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(255, 150, 0, 0.4);
+  }
+}

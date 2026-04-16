@@ -53,3 +53,34 @@
     }
      
 }
+.explore-menu-list-item {
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.explore-menu-list-item:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0px 8px 20px rgba(0, 140, 255, 0.25);
+  background: rgba(0, 140, 255, 0.08);
+  border-radius: 12px;
+}
+
+.explore-menu-list-item img {
+  width: 110px;
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+
+.explore-menu-list-item:hover img {
+  transform: scale(1.15) rotate(2deg);
+}
+
+.explore-menu-list-item img.active {
+  border: 3px solid #008cff;
+  padding: 3px;
+  box-shadow: 0px 0px 15px rgba(0, 140, 255, 0.6);
+}
+
