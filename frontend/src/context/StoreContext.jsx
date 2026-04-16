@@ -9,7 +9,7 @@ const StoreContextProvider = ({ children }) => {
     const [food_list, setFoodList] = useState(defaultFoodList);
 
     // Backend URL
-    const url = https://food-delivery-backend-2gem.onrender.com
+    const url = 'https://food-delivery-backend-2gem.onrender.com'
 
     // ------------------- CART FUNCTIONS -------------------
 
