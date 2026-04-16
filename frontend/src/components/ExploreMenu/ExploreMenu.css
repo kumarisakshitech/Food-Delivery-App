@@ -21,7 +21,7 @@
     overflow-x: scroll;
 }
 .explore-menu-list::-webkit-scrollbar{
-    display: menu;
+    display: none;
 }
 .explore-menu-list-item img{
     width: 7.5vw;

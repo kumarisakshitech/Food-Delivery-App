@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Add.css';
 import { assets } from '../../assets/assets';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const Add = ({url}) => {
   
@@ -33,8 +32,7 @@ const Add = ({url}) => {
     formData.append("image", image);
 
     try {
-      // ✅ Minimal change: Hardcoded backend URL to avoid frontend calling itself
-      const response = await axios.post(`http://localhost:4000/api/food/add`, formData);
+      const response = await axios.post(`${url}/api/food/add`, formData);
 
       if (response.data.success) {
         setData({
@@ -123,8 +121,6 @@ const Add = ({url}) => {
 
         <button type='submit' className='add-btn'>ADD</button>
       </form>
-
-      <ToastContainer position="top-center" autoClose={2000} />
     </div>
   );
 };

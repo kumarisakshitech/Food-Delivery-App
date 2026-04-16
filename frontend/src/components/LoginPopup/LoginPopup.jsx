@@ -48,16 +48,19 @@ const LoginPopup = ({ setShowLogin }) => {
             const result = await response.json();
 
             if (result.success) {
-                setToken(result.token);
-                localStorage.setItem("token", result.token);
-
-                // 🔥 Fix: Store userId correctly (now provided by backend)
-                if (result.userId) {
-                    localStorage.setItem("userId", result.userId);
+                if (currState === "Login") {
+                    setToken(result.token);
+                    localStorage.setItem("token", result.token);
+                    if (result.userId) {
+                        localStorage.setItem("userId", result.userId);
+                    }
+                    setShowLogin(false);
+                } else {
+                    // Register successful - switch to login
+                    alert("Account created! Please login.");
+                    setCurrState("Login");
+                    setData({ name: "", email: "", password: "" });
                 }
-
-                alert(currState === "Login" ? "Login successful!" : "Account created!");
-                setShowLogin(false);
             } else {
                 alert(result.message);
             }

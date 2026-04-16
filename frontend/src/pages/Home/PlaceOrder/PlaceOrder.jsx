@@ -22,18 +22,11 @@ const PlaceOrder = () => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  // PLACE ORDER ===========================
   const placeOrder = async (e) => {
     e.preventDefault();
 
     if (!token) {
       alert("You must login first before placing an order!");
-      return;
-    }
-
-    const userId = localStorage.getItem("userId");
-    if (!userId) {
-      alert("User not logged in! Login to continue.");
       return;
     }
 
@@ -44,8 +37,12 @@ const PlaceOrder = () => {
         quantity: cartItems[item._id],
       }));
 
+    if (orderItems.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
     const orderData = {
-      userId,
       items: orderItems,
       amount: getTotalCartAmount() + 40,
       address: data,
@@ -53,13 +50,13 @@ const PlaceOrder = () => {
 
     try {
       const response = await axios.post(
-        `${url}/api/order/placeOrder`,   // 🔥 fixed endpoint
+        `${url}/api/order/placeOrder`,
         orderData,
-        { headers: { Authorization: `Bearer ${token}` }} // 🔥 token attached
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       if (response.data.success) {
-        window.location.replace(response.data.session_url); // redirect to Stripe
+        window.location.replace(response.data.session_url);
       } else {
         alert("Order error: " + response.data.message);
       }

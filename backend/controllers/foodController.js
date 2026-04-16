@@ -28,3 +28,14 @@ export const getFoodList = async (req, res) => {
     res.json({ success: false, message: "Error fetching food list" });
   }
 };
+
+// Remove food
+export const removeFood = async (req, res) => {
+  try {
+    await foodModel.findByIdAndDelete(req.body.id);
+    res.json({ success: true, message: "Food removed successfully" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Error removing food" });
+  }
+};

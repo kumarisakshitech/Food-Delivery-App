@@ -101,7 +101,7 @@ const verifyOrder = async (req, res) => {
 //user orders for frontend 
 const userOrders = async (req,res)=>{
   try {
-    const orders = await orderModel.find({userId:req.body.userId});
+    const orders = await orderModel.find({userId:req.userId});
     res.json({success:true,data:orders});
   } catch (error) {
     console.log(error);
@@ -109,4 +109,26 @@ const userOrders = async (req,res)=>{
   }
 }
 
-export { placeOrder, verifyOrder ,userOrders};
+// Admin: list all orders
+const listOrders = async (req, res) => {
+  try {
+    const orders = await orderModel.find({});
+    res.json({ success: true, data: orders });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Failed to fetch orders" });
+  }
+};
+
+// Admin: update order status
+const updateStatus = async (req, res) => {
+  try {
+    await orderModel.findByIdAndUpdate(req.body.orderId, { status: req.body.status });
+    res.json({ success: true, message: "Status updated" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Failed to update status" });
+  }
+};
+
+export { placeOrder, verifyOrder, userOrders, listOrders, updateStatus };

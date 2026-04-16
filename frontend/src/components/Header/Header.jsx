@@ -1,15 +1,16 @@
 import React from 'react'
 import './Header.css'
+import { assets } from '../../assets/assets'
 
 const Header = () => {
   return (
-    <div className='header'>
+    <div className='header' style={{ backgroundImage: `url(${assets.header_img})` }}>
         <div className="header-contents">
             <h2>Order your favourite food here</h2>
             <p>
-                Choose from a diverse menu featuring a delectable array of dishes crafted with the finest ingreidents and satisfy your cravings and elevate your dinning experience,one delicious meal ata a time.
+                Choose from a diverse menu featuring a delectable array of dishes crafted with the finest ingredients and satisfy your cravings and elevate your dining experience, one delicious meal at a time.
             </p>
-            <button>View Menu</button>
+            <button onClick={() => document.getElementById('explore-menu')?.scrollIntoView({ behavior: 'smooth' })}>View Menu</button>
         </div>
     </div>
   )

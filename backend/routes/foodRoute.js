@@ -1,13 +1,11 @@
 import express from "express";
 import multer from "multer";
-import { addFood, getFoodList } from "../controllers/foodController.js";  // ✅ FIXED: import getFoodList
-
+import { addFood, getFoodList, removeFood } from "../controllers/foodController.js";
 
 const router = express.Router();
 
-// Multer storage setup
 const storage = multer.diskStorage({
-  destination: "uploads",  // ✅ Make sure 'uploads' folder exists
+  destination: "uploads",
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
   },
@@ -15,8 +13,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// ✅ Routes
 router.post("/add", upload.single("image"), addFood);
-router.get("/list", getFoodList); // ✅ Now it will work
+router.get("/list", getFoodList);
+router.post("/remove", removeFood);
 
 export default router;

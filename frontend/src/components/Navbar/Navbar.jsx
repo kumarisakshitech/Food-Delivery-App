@@ -60,7 +60,7 @@ const Navbar = ({ setShowLogin }) => {
             {dropdown && (
               <ul className="nav-profile-dropdown">
                 <li>
-                  <Link to="/orders">
+                  <Link to="/myorders">
                     <img src={assets.bag_icon} alt="" />
                     <p>Orders</p>
                   </Link>

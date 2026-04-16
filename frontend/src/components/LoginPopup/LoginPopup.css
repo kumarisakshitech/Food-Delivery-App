@@ -63,3 +63,18 @@
     font-weight: 500;
     cursor: pointer;
 }
+
+.toggle-text {
+    text-align: center;
+    color: #808080;
+}
+
+.toggle-text span {
+    color: tomato;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.login-btn {
+    width: 100%;
+}

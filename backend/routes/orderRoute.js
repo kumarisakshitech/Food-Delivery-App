@@ -1,13 +1,13 @@
 import express from "express";
-import auth from "../middleware/auth.js";                     // Correct middleware import
-import { placeOrder, userOrders, verifyOrder } from "../controllers/orderController.js";
-
+import auth from "../middleware/auth.js";
+import { placeOrder, userOrders, verifyOrder, listOrders, updateStatus } from "../controllers/orderController.js";
 
 const router = express.Router();
 
-// Protected Route
 router.post("/placeOrder", auth, placeOrder);
-router.post("/verify",verifyOrder);
-router.post("/userOrders",auth,userOrders);
+router.post("/verify", verifyOrder);
+router.post("/userOrders", auth, userOrders);
+router.get("/list", listOrders);
+router.post("/status", updateStatus);
 
 export default router;

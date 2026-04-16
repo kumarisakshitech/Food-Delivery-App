@@ -56,17 +56,21 @@ const StoreContextProvider = ({ children }) => {
         const fetchFood = async () => {
             try {
                 const res = await fetch(`${url}/api/food/list`);
-                if (!res.ok) throw new Error("Failed to fetch food list");
                 const data = await res.json();
-                // If API returns data, use it; otherwise fallback to default list to keep homepage populated
-                if (data.data && data.data.length > 0) {
-                    setFoodList(data.data);
+                if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+                    // merge: defaultFoodList + backend items (backend items override by _id)
+                    const backendIds = new Set(data.data.map(i => i._id?.toString()));
+                    const merged = [
+                        ...defaultFoodList.filter(i => !backendIds.has(i._id?.toString())),
+                        ...data.data.map(item => ({ ...item, image: `${url}/images/${item.image}` }))
+                    ];
+                    setFoodList(merged);
                 } else {
-                    setFoodList(defaultFoodList);
+                    setFoodList([...defaultFoodList]);
                 }
             } catch (err) {
-                console.warn("Could not fetch food list. Using default.", err);
-                setFoodList(defaultFoodList);
+                console.warn("Backend error, using local food list:", err);
+                setFoodList([...defaultFoodList]);
             }
         };
         fetchFood();
